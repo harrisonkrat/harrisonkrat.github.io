@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<script src="https://unpkg.com/launchdarkly-js-client-sdk@2"></script>
+    <title>LaunchDarkly CSE Demo</title>
+  </head>
+  <body>
+	  <script>
+  		var div = document.createElement('div');
+	    document.body.appendChild(div);
+		
+		var request = 'Please input your first and last name.';
+  		div.appendChild(document.createTextNode(request));
+		div.appendChild(document.createElement('br'));
+		
+		var userFName = document.createElement("INPUT");
+		userFName.setAttribute("type", "text");
+		userFName.setAttribute("value", "First");
+		userFName.onblur = function() {userFName.setAttribute("value", "First")};
+		userFName.onfocus = function() {userFName.setAttribute("value", "")};
+		div.appendChild(userFName);
+		
+		div.appendChild(document.createElement('br'));
+		
+		var userLName = document.createElement("INPUT");
+		userLName.setAttribute("type", "text");
+		userLName.setAttribute("value", "Last");
+		userLName.onblur = function() {userLName.setAttribute("value", "Last")};
+		userLName.onfocus = function() {userLName.setAttribute("value", "")};
+		div.appendChild(userLName);
+		
+		div.appendChild(document.createElement('br'));
+		
+  		var user = {
+	      firstName: userFName.value,
+	      lastName: userLName.value,
+	      key: 'default',
+	      custom: {
+	        groups: 'beta_testers'
+	      }
+	    };
+				
+		var submit = document.createElement("INPUT");
+		submit.setAttribute("type", "button");
+		submit.setAttribute("value", "Submit");
+		submit.onclick = function() {user.firstName = userFName.value; user.lastName = userLName.value; user.key = btoa(user.firstName + ' ' + user.lastName); pumpSunshine();};
+		div.appendChild(submit);
+		
+	    div.appendChild(document.createElement('br'));
+	    div.appendChild(document.createElement('br'));
+  	    var div2 = document.createElement('div');
+	    div.appendChild(div2);
+  	    div2.appendChild(document.createTextNode(''));
+		
+		ldclient = LDClient.initialize('601b7aad2c6a070a54425c72', user);
+		
+		//console.log(user.firstName, user.lastName, user.key, userFName.value, userLName.value, ldclient.getUser());
+
+	    function pumpSunshine() {
+		  ldclient.identify(user);
+		  setTimeout(function(){
+			  //console.log(user.firstName, user.lastName, user.key, userFName.value, userLName.value, ldclient.getUser());
+			  pmCheck = ldclient.variation('positive-message', true);
+			  var pMessage = 'Hey there ' + user.firstName + (pmCheck ? ', you are crushing it!' : ', keep pushing through!');
+			  div2.replaceChild(document.createTextNode(pMessage), div2.firstChild)
+		  }, 500);
+	    }
+	  </script>
+	  
+  </body>
+</html>
