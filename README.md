@@ -40,3 +40,9 @@ Within my LaunchDarkly account, I set up one feature flag called `positive-messa
      1. If the user key's first character is in the regex range A-M, seerve `true`.
      2. If the user key's first character is in the regex range N-Z, seerve `false`.
  - The flag is available to SDKs using client-side `ID`.
+
+**Resources used**
+ - https://docs.launchdarkly.com/sdk/client-side/javascript
+ - https://launchdarkly.github.io/js-client-sdk/interfaces/_launchdarkly_js_client_sdk_.ldclient.html
+ - https://app.launchdarkly.com/default/production/quickstart
+ - https://www.w3schools.com/
