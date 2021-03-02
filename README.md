@@ -3,7 +3,7 @@
 
 **Usage**
 
-Go to https://hkrat.github.io to test the `positive-message` feature flag. Depending on the name values entered, you will see one of two messages.
+Go to https://harrisonkrat.github.io to test the `positive-message` feature flag. Depending on the name values entered, you will see one of two messages.
 Change the name values entered and resubmit, or refresh the page and resubmit.
 If you want to force both message values, submit:
 1. First: Harrison, Last: Krat
